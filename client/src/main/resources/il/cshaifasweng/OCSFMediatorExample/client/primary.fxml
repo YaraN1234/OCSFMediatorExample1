@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="852.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.PrimaryController">
+    <children>
+        <Accordion layoutX="227.0" layoutY="575.0" />
+        <DialogPane fx:id="flower_name1" contentText="CLASSICAL ROUND &#10;FLOWER BOUQUET &#10;OF “AQUA” ROSES" layoutX="375.0" layoutY="180.0" prefHeight="94.0" prefWidth="189.0" />
+        <DialogPane fx:id="flower_name2" contentText="Vintage Pink Dried &#10;Flower Bouquet with &#10;Rose Quartz Crystal" layoutX="101.0" layoutY="187.0" prefHeight="101.0" prefWidth="197.0" />
+        <DialogPane fx:id="flower_name3" contentText="PAPER FLOWER BOUQUET" layoutX="349.0" layoutY="461.0" prefHeight="57.0" prefWidth="189.0" />
+        <DialogPane fx:id="flower_name4" contentText="flower 4" layoutX="138.0" layoutY="461.0" prefHeight="57.0" prefWidth="78.0" />
+        <DialogPane fx:id="flower_name5" contentText="flower 5" layoutX="397.0" layoutY="737.0" prefHeight="57.0" prefWidth="78.0" />
+        <DialogPane fx:id="flower_name6" contentText="flower 6" layoutX="128.0" layoutY="737.0" prefHeight="57.0" prefWidth="78.0" />
+        <DialogPane fx:id="flower_price1" contentText="150₪" layoutX="420.0" layoutY="246.0" prefHeight="57.0" prefWidth="58.0" />
+        <DialogPane fx:id="flower_price2" contentText="100₪" layoutX="150.0" layoutY="258.0" prefHeight="57.0" prefWidth="65.0" />
+        <DialogPane fx:id="flower_price3" contentText="80₪" layoutX="413.0" layoutY="500.0" prefHeight="26.0" prefWidth="47.0" />
+        <DialogPane fx:id="flower_price4" contentText="60₪" layoutX="150.0" layoutY="511.0" prefHeight="46.0" prefWidth="47.0" />
+        <DialogPane fx:id="flower_price5" contentText="15₪" layoutX="413.0" layoutY="781.0" prefHeight="26.0" prefWidth="47.0" />
+        <DialogPane fx:id="flower_price6" contentText="120₪" layoutX="138.0" layoutY="781.0" prefHeight="57.0" prefWidth="58.0" />
+      <ImageView fx:id="flower_button1" fitHeight="150.0" fitWidth="200.0" layoutX="374.0" layoutY="35.0" onMouseClicked="#product_clicked" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../../../../images/flower1.png" />
+        </image>
+      </ImageView>
+      <ImageView fx:id="flower_button2" fitHeight="150.0" fitWidth="200.0" layoutX="108.0" layoutY="35.0" onMouseClicked="#product_clicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/flower2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="flower_button3" fitHeight="150.0" fitWidth="200.0" layoutX="380.0" layoutY="296.0" onMouseClicked="#product_clicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/flower3.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="flower_button4" fitHeight="150.0" fitWidth="200.0" layoutX="108.0" layoutY="303.0" onMouseClicked="#product_clicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/flower4.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="flower_button5" fitHeight="150.0" fitWidth="200.0" layoutX="374.0" layoutY="587.0" onMouseClicked="#product_clicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/flower5.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="flower_button6" fitHeight="150.0" fitWidth="200.0" layoutX="108.0" layoutY="587.0" onMouseClicked="#product_clicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/flower6.png" />
+         </image>
+      </ImageView>
+
+    </children>
+</AnchorPane>
