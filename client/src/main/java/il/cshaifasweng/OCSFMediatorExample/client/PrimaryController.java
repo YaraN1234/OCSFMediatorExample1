@@ -1,6 +1,8 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 import il.cshaifasweng.OCSFMediatorExample.entities.Product;
 
+import java.awt.*;
+import java.awt.MenuItem;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
@@ -10,13 +12,22 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.hibernate.sql.Update;
 
 import static com.sun.xml.bind.v2.schemagen.Util.equal;
 
@@ -24,68 +35,330 @@ import static com.sun.xml.bind.v2.schemagen.Util.equal;
 public class PrimaryController {
 	static boolean returnedFromSecondaryController = false;
 	boolean firstRun = true;
-	@FXML
+	@FXML // ResourceBundle that was given to the FXMLLoader
 	private ResourceBundle resources;
 
-	@FXML
+	@FXML // URL location of the FXML file that was given to the FXMLLoader
 	private URL location;
 
-	@FXML
-	private ImageView flower_button1;
-
-	@FXML
-	private ImageView flower_button2;
-
-	@FXML
-	private ImageView flower_button3;
-
-	@FXML
-	private ImageView flower_button4;
-
-	@FXML
-	private ImageView flower_button5;
+	@FXML // fx:id="adminEditCatalog"
+	private ComboBox<String> adminEditCatalog; // Value injected by FXMLLoader
 
 
-	@FXML
-	private ImageView flower_button6;
+	@FXML // fx:id="EditItemDesc"
+	private TextField EditItemDesc; // Value injected by FXMLLoader
 
-	@FXML
-	public DialogPane flower_name1;
+	@FXML // fx:id="EditItemPrice"
+	private TextField EditItemPrice; // Value injected by FXMLLoader
 
-	@FXML
-	public DialogPane flower_name2;
+	@FXML // fx:id="EditItemType"
+	private TextField EditItemType; // Value injected by FXMLLoader
 
-	@FXML
-	public DialogPane flower_name3;
 
-	@FXML
-	public DialogPane flower_name4;
+	@FXML // fx:id="EditItemExtra"
+	private TextField EditItemExtra; // Value injected by FXMLLoader
 
-	@FXML
-	public DialogPane flower_name5;
+	@FXML // fx:id="customColor"
+	private TextField customColor; // Value injected by FXMLLoader
 
-	@FXML
-	public DialogPane flower_name6;
+	@FXML // fx:id="customPrice"
+	private TextField customPrice; // Value injected by FXMLLoader
 
-	@FXML
-	public DialogPane flower_price1;
+	@FXML // fx:id="customType"
+	private TextField customType; // Value injected by FXMLLoader
 
-	@FXML
-	public DialogPane flower_price2;
+	@FXML // fx:id="CreateCustomItem"
+	public Button CreateCustomItem; // Value injected by FXMLLoader
 
-	@FXML
-	public DialogPane flower_price3;
+	@FXML // fx:id="CancelCustomItem"
+	private Button CancelCustomItem; // Value injected by FXMLLoader
 
-	@FXML
-	public DialogPane flower_price4;
+	@FXML // fx:id="FinishCustomItem"
+	private Button FinishCustomItem; // Value injected by FXMLLoader
 
-	@FXML
-	public DialogPane flower_price5;
 
-	@FXML
-	public DialogPane flower_price6;
+	@FXML // fx:id="flower_button1"
+	private ImageView flower_button1; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_button2"
+	private ImageView flower_button2; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_button3"
+	private ImageView flower_button3; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_button4"
+	private ImageView flower_button4; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_button5"
+	private ImageView flower_button5; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_button6"
+	private ImageView flower_button6; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_name1"
+	private DialogPane flower_name1; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_name2"
+	private DialogPane flower_name2; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_name3"
+	private DialogPane flower_name3; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_name4"
+	private DialogPane flower_name4; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_name5"
+	private DialogPane flower_name5; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_name6"
+	private DialogPane flower_name6; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_price1"
+	private DialogPane flower_price1; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_price2"
+	private DialogPane flower_price2; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_price3"
+	private DialogPane flower_price3; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_price4"
+	private DialogPane flower_price4; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_price5"
+	private DialogPane flower_price5; // Value injected by FXMLLoader
+
+	@FXML // fx:id="flower_price6"
+	private DialogPane flower_price6; // Value injected by FXMLLoader
+
+
+	@FXML // fx:id="AddItem"
+	private Button AddItem; // Value injected by FXMLLoader
+
+	@FXML // fx:id="RemoveItem"
+	private Button RemoveItem; // Value injected by FXMLLoader
+
+	@FXML // fx:id="UpdateItem"
+	private Button UpdateItem; // Value injected by FXMLLoader
 
 	public static String current_button;
+
+	@FXML
+	Product createCustomitem(ActionEvent event) {
+
+		FinishCustomItem.setText("Add Custom Item To Cart");
+		CancelCustomItem.setText("Cancel Custom Item Designer");
+		flower_button1.setVisible(false);
+		flower_button2.setVisible(false);
+		flower_button3.setVisible(false);
+		flower_button4.setVisible(false);
+		flower_button5.setVisible(false);
+		flower_button6.setVisible(false);
+
+		flower_price1.setVisible(false);
+		flower_price2.setVisible(false);
+		flower_price3.setVisible(false);
+		flower_price4.setVisible(false);
+		flower_price5.setVisible(false);
+		flower_price6.setVisible(false);
+
+		flower_name1.setVisible(false);
+		flower_name2.setVisible(false);
+		flower_name3.setVisible(false);
+		flower_name4.setVisible(false);
+		flower_name5.setVisible(false);
+		flower_name6.setVisible(false);
+
+		CreateCustomItem.setVisible(false);
+		adminEditCatalog.setVisible(false);
+
+		EditItemExtra.setVisible(false);
+		EditItemDesc.setVisible(false);
+		EditItemType.setVisible(false);
+		EditItemPrice.setVisible(false);
+		AddItem.setVisible(false);
+		RemoveItem.setVisible(false);
+		UpdateItem.setVisible(false);
+
+		customColor.setVisible(true);
+		customPrice.setVisible(true);
+		customType.setVisible(true);
+
+		CancelCustomItem.setVisible(true);
+		FinishCustomItem.setVisible(true);
+
+		Product newProduct = new Product(0,"test","test","test","test");  // Please Insert Values
+		//CREATE A NEW PRODUCT DYNAMICALLY
+		// Tips: A global variable called ProductID which is incremented after each product created.
+		// A function GetNextProductID that returns a fresh ID for the new product to be added.
+		// Static fields and functions.
+		return newProduct;
+	}
+	@FXML
+	void cancelCustomitem(ActionEvent event) {
+		flower_button1.setVisible(true);
+		flower_button2.setVisible(true);
+		flower_button3.setVisible(true);
+		flower_button4.setVisible(true);
+		flower_button5.setVisible(true);
+		flower_button6.setVisible(true);
+
+		flower_price1.setVisible(true);
+		flower_price2.setVisible(true);
+		flower_price3.setVisible(true);
+		flower_price4.setVisible(true);
+		flower_price5.setVisible(true);
+		flower_price6.setVisible(true);
+
+		flower_name1.setVisible(true);
+		flower_name2.setVisible(true);
+		flower_name3.setVisible(true);
+		flower_name4.setVisible(true);
+		flower_name5.setVisible(true);
+		flower_name6.setVisible(true);
+
+		CreateCustomItem.setVisible(true);
+		adminEditCatalog.setVisible(true);
+
+		customColor.setVisible(false);
+		customPrice.setVisible(false);
+		customType.setVisible(false);
+
+		CancelCustomItem.setVisible(false);
+		FinishCustomItem.setVisible(false);
+	}
+
+	@FXML
+	void adminAddItemFunc(ActionEvent event)
+	{
+		String newType = EditItemType.getText();
+		String newDesc = EditItemDesc.getText();
+		String newPrice = EditItemPrice.getText();
+		// Create a new product with the current variables
+		CreateCustomItem.setVisible(true);
+		adminEditCatalog.setVisible(true);
+
+		customColor.setVisible(false);
+		customPrice.setVisible(false);
+		customType.setVisible(false);
+
+		CancelCustomItem.setVisible(false);
+		FinishCustomItem.setVisible(false);
+
+		EditItemType.setVisible(false);
+		EditItemDesc.setVisible(false);
+		EditItemPrice.setVisible(false);
+		EditItemExtra.setVisible(false);
+	}
+
+	@FXML
+	void adminRemoveItemFunc(ActionEvent event)
+	{
+		String deleteID = EditItemExtra.getText();
+		// Remove the item with the currnet ID from the catalog
+		CreateCustomItem.setVisible(true);
+		adminEditCatalog.setVisible(true);
+
+		customColor.setVisible(false);
+		customPrice.setVisible(false);
+		customType.setVisible(false);
+
+		CancelCustomItem.setVisible(false);
+		FinishCustomItem.setVisible(false);
+
+		EditItemType.setVisible(false);
+		EditItemDesc.setVisible(false);
+		EditItemPrice.setVisible(false);
+		EditItemExtra.setVisible(false);
+
+	}
+
+	@FXML
+	void adminUpdateItemFunc(ActionEvent event)
+	{
+		String newType = EditItemType.getText();
+		String newDesc = EditItemDesc.getText();
+		String newPrice = EditItemPrice.getText();
+		String updateID = EditItemExtra.getText();
+		// Update the item with the current ID with the new variables
+
+		CreateCustomItem.setVisible(true);
+		adminEditCatalog.setVisible(true);
+
+		customColor.setVisible(false);
+		customPrice.setVisible(false);
+		customType.setVisible(false);
+
+		CancelCustomItem.setVisible(false);
+		FinishCustomItem.setVisible(false);
+
+		EditItemType.setVisible(false);
+		EditItemDesc.setVisible(false);
+		EditItemPrice.setVisible(false);
+		EditItemExtra.setVisible(false);
+
+
+	}
+	@FXML
+	void chooseAdminEditCatalog(ActionEvent event)
+	{
+		CreateCustomItem.setVisible(false);
+		adminEditCatalog.setVisible(true);
+
+		customColor.setVisible(false);
+		customPrice.setVisible(false);
+		customType.setVisible(false);
+
+		CancelCustomItem.setVisible(false);
+		FinishCustomItem.setVisible(false);
+
+		String chosen = adminEditCatalog.getSelectionModel().getSelectedItem();
+		System.out.println(chosen);
+		System.out.println("OKAY OKAY");
+		if(chosen == "Add Item")
+		{
+			EditItemType.setText("New Item Type");
+			EditItemDesc.setText("New Item Desc");
+			EditItemPrice.setText("New Item Price");
+			EditItemType.setVisible(true);
+			EditItemDesc.setVisible(true);
+			EditItemPrice.setVisible(true);
+			EditItemExtra.setVisible(false);
+			System.out.println("WENT ADD");
+			RemoveItem.setVisible(false);
+			UpdateItem.setVisible(false);
+			AddItem.setVisible(true);
+		}
+		if(chosen == "Remove Item")
+		{
+			EditItemExtra.setText("Item ID To Remove");
+			EditItemType.setVisible(false);
+			EditItemDesc.setVisible(false);
+			EditItemPrice.setVisible(false);
+			EditItemExtra.setVisible(true);
+			System.out.println("WENT REMOVE");
+			AddItem.setVisible(false);
+			UpdateItem.setVisible(false);
+			RemoveItem.setVisible(true);
+		}
+		if(chosen == "Update Item")
+		{
+			EditItemType.setText("New Item Type");
+			EditItemDesc.setText("New Item Desc");
+			EditItemPrice.setText("New Item Price");
+			EditItemExtra.setText("Item ID To Update");
+			EditItemType.setVisible(true);
+			EditItemDesc.setVisible(true);
+			EditItemPrice.setVisible(true);
+			EditItemExtra.setVisible(true);
+			System.out.println("WENT UPDATE");
+			AddItem.setVisible(false);
+			RemoveItem.setVisible(false);
+			UpdateItem.setVisible(true);
+		}
+	}
+
+
 	public void updateFields(List<Product> allProducts)
 	{
 		flower_name1.setContentText(allProducts.get(0).getName());
@@ -110,6 +383,9 @@ public class PrimaryController {
 	}
 
 
+
+
+
 	@FXML
 	void initialize() throws MalformedURLException {
 		assert flower_button1 != null : "fx:id=\"flower_button1\" was not injected: check your FXML file 'primary.fxml'.";
@@ -130,6 +406,27 @@ public class PrimaryController {
 		assert flower_price4 != null : "fx:id=\"flower_price4\" was not injected: check your FXML file 'primary.fxml'.";
 		assert flower_price5 != null : "fx:id=\"flower_price5\" was not injected: check your FXML file 'primary.fxml'.";
 		assert flower_price6 != null : "fx:id=\"flower_price6\" was not injected: check your FXML file 'primary.fxml'.";
+
+		customColor.setVisible(false);
+		customPrice.setVisible(false);
+		customType.setVisible(false);
+
+		EditItemType.setVisible(false);
+		EditItemDesc.setVisible(false);
+		EditItemPrice.setVisible(false);
+		EditItemExtra.setVisible(false);
+
+		AddItem.setVisible(false);
+		RemoveItem.setVisible(false);
+		UpdateItem.setVisible(false);
+
+		CancelCustomItem.setVisible(false);
+		FinishCustomItem.setVisible(false);
+
+		adminEditCatalog.getItems().add("Add Item");
+		adminEditCatalog.getItems().add("Remove Item");
+		adminEditCatalog.getItems().add("Update Item");
+
 
 		initializeData();
 		if(returnedFromSecondaryController)
@@ -169,6 +466,11 @@ public class PrimaryController {
 				e.printStackTrace();
 			}
 
+
+		}
+		else{ // this is only for limited TIME SHOULD DELETE LATER !
+
+			Product flowerToAdd = new Product(7,"stam string","stam string 2","stam string 3","er fek");
 
 		}
 
